@@ -32,7 +32,7 @@ existing test patterns in `packages/frontend/src/components/__tests__/`.
 
 **Performance Goals**: N/A — simple date comparison per todo on each render; no measurable performance target beyond existing render performance
 
-**Constraints**: Must not introduce new dependencies or backend/API changes; must reuse existing `--danger-color` design token from `docs/ui-guidelines.md` / `theme.css`; must meet WCAG AA text-based status conveyance (no color-only signal)
+**Constraints**: Must not introduce new dependencies or backend/API changes; must reuse existing `--danger-color` design token from `docs/ui-guidelines.md` / `theme.css`; must meet WCAG AA text-based status conveyance (no color-only signal); badge sizing/shape/padding follows the "Status Badge" component pattern documented in `docs/ui-guidelines.md`
 
 **Scale/Scope**: Single component change (`TodoCard.js`) plus a small pure utility function and associated unit/component tests; no changes to `todoService.js`, backend, or data model
 
@@ -42,7 +42,7 @@ existing test patterns in `packages/frontend/src/components/__tests__/`.
 
 - **I. Code Quality & Consistency**: PASS — change is confined to `packages/frontend/src/components/TodoCard.js` (and a new small utility module), follows existing camelCase/PascalCase conventions and import ordering.
 - **II. Test-First Quality Assurance**: PASS — new overdue-determination logic and its rendering will have colocated Jest/RTL tests in `__tests__/`, covering all acceptance scenarios (overdue, not-overdue-future, no-due-date, completed-with-past-date, live updates on toggle/edit).
-- **III. Design System Fidelity**: PASS — badge reuses the existing `--danger-color` token and existing typography scale (Caption-sized text), placed next to the due date inside the current `TodoCard` layout; no new colors or layout patterns introduced.
+- **III. Design System Fidelity**: PASS — the badge/chip pattern was not previously documented in `docs/ui-guidelines.md`, so per this principle's "deviations require updating `docs/ui-guidelines.md` first" rule, a new "Status Badge" component pattern (shape, Caption typography, padding, placement, and the `--danger-color` variant for "Overdue") was added to `docs/ui-guidelines.md` §Components as part of this plan, before implementation. `TodoCard` implementation MUST follow that documented pattern; no new colors or design tokens were introduced.
 - **IV. Simplicity & Scope Discipline**: PASS — no sorting/filtering/counting/notifications added, matching the spec's explicit Assumptions; overdue status is derived, not persisted.
 - **V. Data Integrity & Immediate Persistence**: PASS — feature does not change persistence behavior; overdue indicator recomputes from existing persisted fields on every render, so it never depends on stale state after refresh/edit/toggle.
 

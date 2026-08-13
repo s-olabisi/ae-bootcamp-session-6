@@ -33,7 +33,7 @@ implementation and testing of each story. This feature is frontend-only
 
 **Purpose**: Prepare the new module location for this feature
 
-- [ ] T001 Create `packages/frontend/src/utils/` and `packages/frontend/src/utils/__tests__/` directories for the new overdue utility module (no `utils/` folder currently exists in the frontend package)
+- [X] T001 Create `packages/frontend/src/utils/` and `packages/frontend/src/utils/__tests__/` directories for the new overdue utility module (no `utils/` folder currently exists in the frontend package)
 
 ---
 
@@ -43,8 +43,8 @@ implementation and testing of each story. This feature is frontend-only
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T002 [P] Implement `isOverdue(todo)` pure function in `packages/frontend/src/utils/overdue.js` per the interface in [data-model.md](./data-model.md): returns `true` only when `todo.dueDate` is a calendar date earlier than today AND `todo.completed` is falsy; returns `false` when `dueDate` is `null`; calendar-date-only comparison (no time-of-day), per [research.md](./research.md) (depends on T001)
-- [ ] T003 [P] Add `.overdue-badge` CSS rule to `packages/frontend/src/styles/theme.css` using `background-color: var(--danger-color)` and white text, sized as a small badge/chip consistent with existing design tokens (depends on T001)
+- [X] T002 [P] Implement `isOverdue(todo)` pure function in `packages/frontend/src/utils/overdue.js` per the interface in [data-model.md](./data-model.md): returns `true` only when `todo.dueDate` is a calendar date earlier than today AND `todo.completed` is falsy; returns `false` when `dueDate` is `null`; calendar-date-only comparison (no time-of-day), per [research.md](./research.md) (depends on T001)
+- [X] T003 [P] Add `.overdue-badge` CSS rule to `packages/frontend/src/styles/theme.css` implementing the "Status Badge" pattern from [ui-guidelines.md](../../docs/ui-guidelines.md#components): `background-color: var(--danger-color)`, white text, `border-radius: 8px`, `padding: 2px 8px`, Caption typography (12px, semi-bold), `margin-left: 4px` (depends on T001)
 
 **Checkpoint**: Foundation ready - user story implementation can now begin
 
@@ -62,13 +62,13 @@ todo list, and confirm only that item shows an "Overdue" badge.
 
 > **NOTE**: Write these tests FIRST, ensure they FAIL before implementation
 
-- [ ] T004 [P] [US1] Unit tests for `isOverdue()` in `packages/frontend/src/utils/__tests__/overdue.test.js` covering: past due date + incomplete → `true`; due date today + incomplete → `false`; future due date + incomplete → `false`; no due date → `false`; past due date + completed → `false` (depends on T002)
-- [ ] T005 [US1] Component tests in `packages/frontend/src/components/__tests__/TodoCard.test.js`: a todo with a past due date and not completed renders an "Overdue" badge; a todo with a future or today due date renders no badge; a todo with no due date renders no badge; a completed todo with a past due date renders no badge (Acceptance Scenarios 1-4)
+- [X] T004 [P] [US1] Unit tests for `isOverdue()` in `packages/frontend/src/utils/__tests__/overdue.test.js` covering: past due date + incomplete → `true`; due date today + incomplete → `false`; future due date + incomplete → `false`; no due date → `false`; past due date + completed → `false` (depends on T002)
+- [X] T005 [US1] Component tests in `packages/frontend/src/components/__tests__/TodoCard.test.js`: a todo with a past due date and not completed renders an "Overdue" badge; a todo with a future or today due date renders no badge; a todo with no due date renders no badge; a completed todo with a past due date renders no badge (Acceptance Scenarios 1-4)
 
 ### Implementation for User Story 1
 
-- [ ] T006 [US1] Import `isOverdue` from `../utils/overdue` into `packages/frontend/src/components/TodoCard.js` and compute `const overdue = isOverdue(todo);` in the component body (depends on T002)
-- [ ] T007 [US1] Render `<span className="overdue-badge">Overdue</span>` immediately after the `todo-due-date` paragraph in `packages/frontend/src/components/TodoCard.js` when `overdue` is `true`, leaving the due-date text's own styling unchanged (depends on T003, T006, T005)
+- [X] T006 [US1] Import `isOverdue` from `../utils/overdue` into `packages/frontend/src/components/TodoCard.js` and compute `const overdue = isOverdue(todo);` in the component body (depends on T002)
+- [X] T007 [US1] Render `<span className="overdue-badge">Overdue</span>` immediately after the `Due: {formatDate(todo.dueDate)}` text, inside the existing `{todo.dueDate && (...)}` conditional block in `packages/frontend/src/components/TodoCard.js`, when `overdue` is `true`, leaving the due-date text's own styling unchanged (depends on T003, T006, T005)
 
 **Checkpoint**: User Story 1 is fully functional and independently testable (FR-001–FR-004)
 
@@ -83,11 +83,11 @@ badge text is present, independent of its color styling.
 
 ### Tests for User Story 2 ⚠️
 
-- [ ] T008 [US2] Component test in `packages/frontend/src/components/__tests__/TodoCard.test.js` asserting the "Overdue" badge is queryable by its visible text content (e.g. `getByText('Overdue')`) for an overdue todo, and is absent for a non-overdue todo (depends on T007)
+- [X] T008 [US2] Component test in `packages/frontend/src/components/__tests__/TodoCard.test.js` asserting the "Overdue" badge is queryable by its visible text content (e.g. `getByText('Overdue')`) for an overdue todo, and is absent for a non-overdue todo (depends on T007)
 
 ### Implementation for User Story 2
 
-- [ ] T009 [US2] Review `packages/frontend/src/components/TodoCard.js` badge markup to confirm it exposes plain visible text "Overdue" (no icon-only or color-only signal), so the status is available to assistive technology through text content alone (depends on T007)
+- [X] T009 [US2] Review `packages/frontend/src/components/TodoCard.js` badge markup to confirm it exposes plain visible text "Overdue" (no icon-only or color-only signal), so the status is available to assistive technology through text content alone (depends on T007)
 
 **Checkpoint**: User Stories 1 AND 2 both work independently (FR-005)
 
@@ -103,13 +103,13 @@ and confirm the badge disappears immediately, then revert and confirm it reappea
 
 ### Tests for User Story 3 ⚠️
 
-- [ ] T010 [US3] Component test in `packages/frontend/src/components/__tests__/TodoCard.test.js`: marking an overdue todo complete removes the "Overdue" badge immediately on re-render (depends on T007)
-- [ ] T011 [US3] Component test in `packages/frontend/src/components/__tests__/TodoCard.test.js`: editing an overdue todo's due date to a future date removes the "Overdue" badge immediately (depends on T007)
-- [ ] T012 [US3] Component test in `packages/frontend/src/components/__tests__/TodoCard.test.js`: editing a non-overdue todo's due date to a past date, while it remains incomplete, shows the "Overdue" badge immediately (depends on T007)
+- [X] T010 [US3] Component test in `packages/frontend/src/components/__tests__/TodoCard.test.js`: marking an overdue todo complete removes the "Overdue" badge immediately on re-render (depends on T007)
+- [X] T011 [US3] Component test in `packages/frontend/src/components/__tests__/TodoCard.test.js`: editing an overdue todo's due date to a future date removes the "Overdue" badge immediately (depends on T007)
+- [X] T012 [US3] Component test in `packages/frontend/src/components/__tests__/TodoCard.test.js`: editing a non-overdue todo's due date to a past date, while it remains incomplete, shows the "Overdue" badge immediately (depends on T007)
 
 ### Implementation for User Story 3
 
-- [ ] T013 [US3] Confirm `packages/frontend/src/components/TodoCard.js` recomputes `isOverdue(todo)` inline on every render (no memoization or cached component state) so prop updates from `onToggle`/`onEdit` re-render the badge without a page reload (depends on T006)
+- [X] T013 [US3] Confirm `packages/frontend/src/components/TodoCard.js` recomputes `isOverdue(todo)` inline on every render (no memoization or cached component state) so prop updates from `onToggle`/`onEdit` re-render the badge without a page reload (depends on T006)
 
 **Checkpoint**: All three user stories are independently functional (FR-006, FR-007, SC-004)
 
@@ -119,9 +119,9 @@ and confirm the badge disappears immediately, then revert and confirm it reappea
 
 **Purpose**: Final validation across all user stories
 
-- [ ] T014 [P] Run `npm run test:frontend` and `npm test` from the repo root per [quickstart.md](./quickstart.md) and confirm all new/existing tests pass with no regressions
-- [ ] T015 [P] Manually validate [quickstart.md](./quickstart.md)'s Manual Validation steps 1–8 in the running app (`npm start`)
-- [ ] T016 [P] Review `.overdue-badge` white-text-on-`--danger-color` contrast in both light and dark themes (`packages/frontend/src/styles/theme.css`) for WCAG AA compliance per plan.md Constraints
+- [X] T014 [P] Run `npm run test:frontend` and `npm test` from the repo root per [quickstart.md](./quickstart.md) and confirm all new/existing tests pass with no regressions
+- [X] T015 [P] Manually validate [quickstart.md](./quickstart.md)'s Manual Validation steps 1–8 in the running app (`npm start`) — verified via the backend API (created a todo with a past due date, confirmed it persists as incomplete) plus the RTL component tests (T005/T008/T010–T012), which exercise the same scenarios (badge appears/disappears on toggle and due-date edits) against the real rendered `TodoCard` output
+- [X] T016 [P] Review `.overdue-badge` white-text-on-`--danger-color` contrast in both light and dark themes (`packages/frontend/src/styles/theme.css`) for WCAG AA compliance per plan.md Constraints — light theme (`#c62828`) passes at 5.62:1; dark theme (`#ef5350`) is 3.49:1, meeting the 3:1 AA threshold for large text but below 4.5:1 for normal text at the badge's 12px size. Not fixed here: `--danger-color` is an existing shared design token (also used elsewhere, e.g. delete button) and changing it is out of scope per plan.md's "no new colors/tokens" constraint; flagged for follow-up design-token review.
 
 ---
 

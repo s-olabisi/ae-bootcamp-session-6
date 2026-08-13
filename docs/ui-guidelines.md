@@ -93,7 +93,8 @@ All spacing follows an 8px grid system for consistency:
 - **Content Area**: Middle section with title and due date
   - Title text: `Body` typography
   - Due date (if present): `Caption` typography, text-secondary color
-  - Layout: Title on top, due date below
+  - Overdue status (if applicable): Status badge rendered inline next to the due date (see Status Badge below); due date text styling itself is unchanged
+  - Layout: Title on top, due date (with optional status badge) below
 - **Actions**: Right side with edit and delete buttons
   - Edit icon/button: Secondary color
   - Delete icon/button: Danger color
@@ -101,6 +102,16 @@ All spacing follows an 8px grid system for consistency:
 #### Completed State
 - Title text: Strike-through with reduced opacity (0.6)
 - Checkbox: Marked/filled with success color
+
+### Status Badge
+- **Purpose**: Conveys a todo's status (e.g. overdue) via visible text, never via color alone, so the status remains accessible without relying on color perception
+- **Shape**: Small rounded chip — `border-radius: 8px` (consistent with the app's 4-8px shape range), inline with surrounding text
+- **Typography**: `Caption` typography (12px), semi-bold (600) for legibility at small size
+- **Padding**: 2px 8px (vertical × horizontal) — smaller than the standard `xs` (8px) grid unit to stay compact next to inline text, horizontal padding aligned to the `xs` grid unit
+- **Colors**: Background uses the semantic color for the status being conveyed (e.g. Danger color for "Overdue"); text is always white for contrast
+- **Placement**: Inline, directly after the related text (e.g. immediately after the due date) with a small left margin (4px) to separate it from adjacent text
+- **Variants**:
+  - **Overdue**: `Danger` background, white text, label text "Overdue"
 
 ### Input Fields
 - **Border**: 1px solid border color
