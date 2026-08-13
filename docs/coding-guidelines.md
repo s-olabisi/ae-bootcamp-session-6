@@ -319,3 +319,4 @@ These guidelines are living documents. As the project evolves, consider:
 - Updating guidelines based on team feedback
 - Keeping tooling and linter configurations current
 - Sharing knowledge and code reviews to improve team practices
+
